@@ -36,6 +36,22 @@ const menuItems = [
 ]
 
 const route = useRoute()
+
+const getHeaderTitle = () => {
+  const titles: Record<string, string> = {
+    '/': 'The Academic Editorial',
+    '/fees': 'Fees & Payments',
+    '/bus-tracking': 'Live Bus Tracking',
+    '/students': 'Student Management',
+    '/classes': 'Classes',
+    '/attendance': 'Attendance',
+    '/progress': 'Progress',
+    '/curriculum': 'Curriculum',
+    '/reports': 'Reports',
+    '/prediction': 'Prediction',
+  }
+  return titles[route.path] || 'The Academic Editorial'
+}
 </script>
 
 <template>
@@ -102,9 +118,11 @@ const route = useRoute()
       <!-- Header -->
       <header class="h-24 bg-[#F8FAFC] flex items-center justify-between px-10 border-b border-slate-100/50">
         <div class="flex items-center space-x-12">
-          <h2 class="text-2xl font-black text-[#0F172A] tracking-tighter">The Academic Editorial</h2>
+          <h2 class="text-2xl font-black text-[#0F172A] tracking-tighter">
+            {{ getHeaderTitle() }}
+          </h2>
           
-          <nav class="flex items-center space-x-8">
+          <nav v-if="route.path !== '/fees'" class="flex items-center space-x-8">
             <button 
               v-for="tab in ['Overview', 'Curriculum', 'Reports']" 
               :key="tab"
@@ -121,7 +139,7 @@ const route = useRoute()
             <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
             <input 
               type="text" 
-              placeholder="Search students, records..." 
+              :placeholder="route.path === '/fees' ? 'Search invoices...' : 'Search students, records...'" 
               class="w-full pl-12 pr-4 py-3 bg-white border border-slate-100 rounded-xl focus:ring-2 focus:ring-slate-100 text-xs font-bold transition-all shadow-sm"
             >
           </div>
