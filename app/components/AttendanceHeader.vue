@@ -3,18 +3,18 @@ import { CheckCircle2 } from 'lucide-vue-next'
 </script>
 
 <template>
-  <div class="flex items-center justify-between mb-10">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
     <div>
-      <h2 class="text-3xl font-bold text-[#0F172A]">Class 10A - Mathematics</h2>
-      <p class="text-slate-400 mt-1 font-medium">Sunday, Oct 12 • 09:00 AM - 10:30 AM</p>
+      <h2 class="text-2xl font-bold text-slate-800" style="font-family: var(--font-display)">Class 10A - Mathematics</h2>
+      <p class="text-slate-500 mt-1">Sunday, Oct 12 • 09:00 AM - 10:30 AM</p>
     </div>
     
-    <div class="flex items-center space-x-6">
-      <div class="bg-[#E2E8F0] px-4 py-1.5 rounded-full">
-        <span class="text-[10px] font-bold text-[#475569] tracking-widest uppercase">24/28 STUDENTS RECORDED</span>
+    <div class="flex flex-wrap items-center gap-4">
+      <div class="bg-slate-100 px-4 py-2 rounded-xl">
+        <span class="text-xs font-medium text-slate-500">24/28 Students Recorded</span>
       </div>
-      <button class="bg-[#0F172A] text-white px-6 py-3 rounded-xl font-bold flex items-center shadow-lg hover:bg-slate-800 transition-all">
-        <CheckCircle2 class="w-5 h-5 mr-3" />
+      <button class="btn-primary flex items-center">
+        <CheckCircle2 class="w-4 h-4 mr-2" />
         End Session
       </button>
     </div>

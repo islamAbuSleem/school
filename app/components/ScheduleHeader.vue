@@ -3,19 +3,19 @@ import { LayoutGrid, Sparkles } from 'lucide-vue-next'
 </script>
 
 <template>
-  <div class="flex items-center justify-between mb-8">
+  <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-6 gap-4">
     <div>
-      <h2 class="text-4xl font-extrabold text-[#0F172A] tracking-tight">Weekly Class Schedule</h2>
-      <p class="text-slate-400 mt-2 font-semibold text-lg">Academic Year 2023–2024 • Term 2</p>
+      <h2 class="page-title">Weekly Class Schedule</h2>
+      <p class="text-slate-500 mt-1">Academic Year 2023–2024 • Term 2</p>
     </div>
     
-    <div class="flex items-center space-x-4">
-      <button class="bg-white text-[#0F172A] px-6 py-3 rounded-xl font-bold flex items-center shadow-sm ring-1 ring-slate-200 hover:bg-slate-50 transition-all">
-        <LayoutGrid class="w-5 h-5 mr-3" />
+    <div class="flex items-center gap-3">
+      <button class="btn-secondary flex items-center">
+        <LayoutGrid class="w-4 h-4 mr-2" />
         Manage Classrooms
       </button>
-      <button class="bg-[#0F172A] text-white px-6 py-3 rounded-xl font-bold flex items-center shadow-lg hover:bg-slate-800 transition-all">
-        <Sparkles class="w-5 h-5 mr-3 text-blue-400" />
+      <button class="btn-primary flex items-center">
+        <Sparkles class="w-4 h-4 mr-2 text-white/80" />
         Generate Auto Schedule
       </button>
     </div>

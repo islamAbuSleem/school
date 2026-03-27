@@ -3,16 +3,16 @@ import { TrendingUp, Calendar } from 'lucide-vue-next'
 
 const stats = [
   { 
-    label: 'CUMULATIVE GPA', 
+    label: 'Cumulative GPA', 
     value: '3.8', 
     target: '/ 4.0',
     description: 'Benjamin ranks in the top 5% of his cohort this semester.', 
     icon: TrendingUp, 
-    color: 'text-indigo-600', 
+    color: 'text-accent', 
     bg: 'bg-indigo-50' 
   },
   { 
-    label: 'ATTENDANCE', 
+    label: 'Attendance', 
     value: '98.4%', 
     description: 'Total of 2 unexcused absences this term.', 
     icon: Calendar, 
@@ -23,26 +23,26 @@ const stats = [
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-8 mb-10">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <div 
       v-for="stat in stats" 
       :key="stat.label"
-      class="bg-white p-10 rounded-[40px] shadow-sm ring-1 ring-slate-100 flex flex-col justify-between h-64 transition-all hover:scale-[1.02] cursor-pointer group"
+      class="glass-card"
     >
-      <div class="flex items-start justify-between">
-        <div :class="['px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase shadow-sm', stat.bg, stat.color]">
+      <div class="flex items-start justify-between mb-4">
+        <span :class="['px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm', stat.bg, stat.color]">
           {{ stat.label }}
-        </div>
-        <div class="p-3 bg-white rounded-2xl shadow-sm ring-1 ring-slate-100 group-hover:scale-110 transition-transform">
-          <component :is="stat.icon" class="w-6 h-6" :class="stat.color" stroke-width="2.5" />
+        </span>
+        <div class="p-2 bg-white rounded-xl shadow-md">
+          <component :is="stat.icon" class="w-5 h-5" :class="stat.color" stroke-width="2" />
         </div>
       </div>
       <div>
-        <div class="flex items-baseline space-x-3 mb-2">
-          <p class="text-6xl font-black text-[#0F172A] tracking-tighter">{{ stat.value }}</p>
-          <p v-if="stat.target" class="text-2xl font-black text-slate-300 tracking-tight">{{ stat.target }}</p>
+        <div class="flex items-baseline gap-2 mb-1">
+          <p class="text-4xl font-bold text-slate-800" style="font-family: var(--font-display)">{{ stat.value }}</p>
+          <p v-if="stat.target" class="text-lg font-medium text-slate-300">{{ stat.target }}</p>
         </div>
-        <p class="text-[11px] font-bold text-slate-400 mt-2 max-w-[200px] leading-relaxed">{{ stat.description }}</p>
+        <p class="text-xs text-slate-400 mt-2 leading-relaxed">{{ stat.description }}</p>
       </div>
     </div>
   </div>

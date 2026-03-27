@@ -7,6 +7,22 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
   css: ['@/assets/css/main.css'],
+  tailwindcss: {
+    config: {
+      theme: {
+        extend: {
+          colors: {
+            accent: {
+              DEFAULT: '#6366F1',
+              hover: '#4F46E5',
+              glow: 'rgba(99, 102, 241, 0.25)',
+            },
+            primary: '#0F172A',
+          }
+        }
+      }
+    }
+  },
   app: {
     head: {
       title: 'Editorial Admin - Prestige Academy',

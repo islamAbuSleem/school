@@ -3,21 +3,21 @@ import { UserPlus } from 'lucide-vue-next'
 </script>
 
 <template>
-  <div class="flex items-end justify-between mb-12">
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-4">
     <div>
-      <div class="flex items-center space-x-3 text-[10px] font-black tracking-[0.3em] text-slate-300 uppercase mb-4">
-        <span>DASHBOARD</span>
-        <span class="text-slate-200">/</span>
-        <span class="text-slate-400">STUDENT DIRECTORY</span>
+      <div class="flex items-center space-x-2 text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">
+        <span>Dashboard</span>
+        <span class="text-slate-300">/</span>
+        <span class="text-accent">Student Directory</span>
       </div>
-      <h2 class="text-5xl font-black text-[#0F172A] tracking-tighter">Student Management</h2>
-      <p class="text-lg font-bold text-slate-400 mt-4 leading-relaxed max-w-xl">
-        Maintain high-prestige academic records and institutional integrity through our editorial data suite.
+      <h2 class="page-title">Student Management</h2>
+      <p class="text-slate-500 mt-2 leading-relaxed max-w-xl">
+        Maintain academic records and institutional integrity through our comprehensive data suite.
       </p>
     </div>
     
-    <button class="bg-[#0F172A] text-white px-10 py-5 rounded-[24px] font-black text-[11px] tracking-widest flex items-center shadow-2xl shadow-slate-200 hover:bg-slate-800 transition-all uppercase">
-      <UserPlus class="w-5 h-5 mr-4" />
+    <button class="btn-primary flex items-center self-start lg:self-auto">
+      <UserPlus class="w-4 h-4 mr-2" />
       Add New Student
     </button>
   </div>
