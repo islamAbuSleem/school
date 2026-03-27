@@ -7,6 +7,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
   css: ['@/assets/css/main.css'],
+  nitro: {
+    output: {
+      dir: '.output-new'
+    }
+  },
   tailwindcss: {
     config: {
       theme: {
