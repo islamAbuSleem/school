@@ -1,5 +1,6 @@
 # Nuxt dev/build outputs
 .output
+.output-new
 .data
 .nuxt
 .nitro
@@ -12,6 +13,8 @@ node_modules
 # Logs
 logs
 *.log
+
+*.mjs
 
 # Misc
 .DS_Store
