@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { ChevronDown } from 'lucide-vue-next'
+const { selectedGrade, selectedTeacher, viewMode, setGrade, setTeacher, setViewMode, grades, teachers } = useSchedule()
+
+const gradeOptions = grades.map(g => ({ value: g, label: g }))
+const teacherOptions = teachers.map(t => ({ value: t, label: t }))
 
 const viewOptions = [
-  { label: 'Week View', active: true },
-  { label: 'Day View', active: false },
+  { label: 'Week View', value: 'Week View' },
+  { label: 'Day View', value: 'Day View' },
 ]
 </script>
 
@@ -12,14 +15,16 @@ const viewOptions = [
     <div class="flex flex-wrap items-center gap-3">
       <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Filters:</span>
       <div class="flex flex-wrap items-center gap-2">
-        <button class="flex items-center px-4 py-2 bg-white text-slate-600 text-sm font-medium rounded-xl shadow-sm border border-slate-100 hover:border-slate-200 transition-all">
-          Filter by Grade
-          <ChevronDown class="w-4 h-4 ml-2 text-slate-400" />
-        </button>
-        <button class="flex items-center px-4 py-2 bg-white text-slate-600 text-sm font-medium rounded-xl shadow-sm border border-slate-100 hover:border-slate-200 transition-all">
-          Filter by Teacher
-          <ChevronDown class="w-4 h-4 ml-2 text-slate-400" />
-        </button>
+        <BaseDropdown 
+          :options="gradeOptions" 
+          v-model="selectedGrade"
+          placeholder="Filter by Grade"
+        />
+        <BaseDropdown 
+          :options="teacherOptions" 
+          v-model="selectedTeacher"
+          placeholder="Filter by Teacher"
+        />
       </div>
     </div>
 
@@ -27,8 +32,9 @@ const viewOptions = [
       <button 
         v-for="option in viewOptions" 
         :key="option.label"
+        @click="setViewMode(option.value)"
         class="px-4 py-2 text-sm font-medium rounded-lg transition-all"
-        :class="option.active ? 'bg-white text-accent shadow-sm' : 'text-slate-400 hover:text-slate-600'"
+        :class="viewMode === option.value ? 'bg-white text-accent shadow-sm' : 'text-slate-400 hover:text-slate-600'"
       >
         {{ option.label }}
       </button>

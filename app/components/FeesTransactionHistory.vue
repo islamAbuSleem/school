@@ -19,17 +19,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+          <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors group">
             <td class="px-6 py-5">
-              <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
-                  <GraduationCap class="w-5 h-5 text-slate-400" />
+              <NuxtLink to="/fees/INV-2023-089" class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center group-hover:bg-accent/10 transition-colors">
+                  <GraduationCap class="w-5 h-5 text-slate-400 group-hover:text-accent transition-colors" />
                 </div>
                 <div>
-                  <p class="text-sm font-semibold text-slate-700">Fall Quarter Tuition</p>
+                  <p class="text-sm font-semibold text-slate-700 group-hover:text-accent transition-colors">Fall Quarter Tuition</p>
                   <p class="text-xs text-slate-400">INV-2023-089</p>
                 </div>
-              </div>
+              </NuxtLink>
             </td>
             <td class="px-6 py-5">
               <p class="text-sm font-medium text-slate-600">Sep 12, 2023</p>
@@ -46,17 +46,17 @@
             </td>
           </tr>
 
-          <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+          <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors group">
             <td class="px-6 py-5">
-              <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center">
-                  <Zap class="w-5 h-5 text-amber-500" />
+              <NuxtLink to="/fees/ACT-9921" class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center group-hover:bg-accent/10 transition-colors">
+                  <Zap class="w-5 h-5 text-amber-500 group-hover:text-accent transition-colors" />
                 </div>
                 <div>
-                  <p class="text-sm font-semibold text-slate-700">Athletics & Club Fees</p>
+                  <p class="text-sm font-semibold text-slate-700 group-hover:text-accent transition-colors">Athletics & Club Fees</p>
                   <p class="text-xs text-slate-400">ACT-9921</p>
                 </div>
-              </div>
+              </NuxtLink>
             </td>
             <td class="px-6 py-5">
               <p class="text-sm font-medium text-slate-600">Sep 15, 2023</p>
@@ -73,17 +73,17 @@
             </td>
           </tr>
 
-          <tr class="hover:bg-slate-50 transition-colors">
+          <tr class="hover:bg-slate-50 transition-colors group">
             <td class="px-6 py-5">
-              <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
-                  <BookOpen class="w-5 h-5 text-blue-500" />
+              <NuxtLink to="/fees/LAB-4402" class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-accent/10 transition-colors">
+                  <BookOpen class="w-5 h-5 text-blue-500 group-hover:text-accent transition-colors" />
                 </div>
                 <div>
-                  <p class="text-sm font-semibold text-slate-700">Resource & Tech Lab Fee</p>
+                  <p class="text-sm font-semibold text-slate-700 group-hover:text-accent transition-colors">Resource & Tech Lab Fee</p>
                   <p class="text-xs text-slate-400">LAB-4402</p>
                 </div>
-              </div>
+              </NuxtLink>
             </td>
             <td class="px-6 py-5">
               <p class="text-sm font-medium text-slate-600">Sep 18, 2023</p>
