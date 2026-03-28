@@ -4,15 +4,15 @@
     <template v-if="activeTab === 'Overview'">
       <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between mb-8 gap-4">
         <div>
-          <h2 class="page-title animate-fade-in">Welcome back, Administrator</h2>
+          <h2 class="page-title animate-fade-in">{{ t('welcome') }}</h2>
           <p class="text-slate-500 mt-2 leading-relaxed max-w-2xl animate-fade-in stagger-1">
-            Here's the curated overview of Prestige Academy's performance and operations for today.
+            {{ t('overview_desc') }}
           </p>
         </div>
         
         <div class="flex items-center glass-card-static px-2 py-1.5">
           <button class="px-4 py-2 text-sm font-medium text-slate-400 hover:text-slate-600 transition-colors rounded-lg">Term 2: 2024</button>
-          <button class="btn-primary text-xs px-6">Academic Overview</button>
+          <button class="btn-primary text-xs px-6">{{ t('academic_overview') }}</button>
         </div>
       </div>
 
@@ -71,4 +71,5 @@
 
 <script setup lang="ts">
 const { activeTab } = useDashboard()
+const { t } = useLocale()
 </script>
