@@ -3,7 +3,7 @@ import { BarChart3, TrendingUp } from 'lucide-vue-next'
 </script>
 
 <template>
-  <div class="glass-card group cursor-pointer">
+  <div class="glass-card group cursor-pointer p-4">
     <div class="flex items-start justify-between mb-4">
       <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Enrollment</p>
       <div class="p-2.5 bg-white rounded-xl shadow-md group-hover:scale-110 transition-transform">

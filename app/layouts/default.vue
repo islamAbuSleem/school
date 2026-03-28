@@ -55,6 +55,7 @@ const getHeaderTitle = () => {
 }
 
 const { success } = useToast()
+const { activeTab, setActiveTab } = useDashboard()
 
 const handleLogout = () => {
   success('Logged out', 'You have been successfully logged out')
@@ -146,18 +147,19 @@ const handleSettings = () => {
     <!-- Main Content -->
     <div class="flex-1 flex flex-col overflow-hidden">
       <!-- Header -->
-      <header class="h-20 bg-white/60 backdrop-blur-xl border-b border-white/50 flex items-center justify-between px-6 lg:px-10">
+      <header class="h-20 bg-white/60 backdrop-blur-xl border-b border-white/50 flex items-center justify-between px-6 lg:px-10 z-50 relative">
         <div class="flex items-center space-x-8 ml-12 lg:ml-0">
           <h2 class="text-xl lg:text-2xl font-bold text-slate-800" style="font-family: var(--font-display)">
             {{ getHeaderTitle() }}
           </h2>
           
-          <nav v-if="route.path !== '/fees'" class="hidden md:flex items-center space-x-6">
+          <nav v-if="route.path === '/'" class="hidden md:flex items-center space-x-6">
             <button 
               v-for="tab in ['Overview', 'Curriculum', 'Reports']" 
               :key="tab"
+              @click="setActiveTab(tab)"
               class="text-sm font-medium pb-1 transition-all border-b-2"
-              :class="tab === 'Overview' ? 'text-accent border-accent' : 'text-slate-400 border-transparent hover:text-slate-600'"
+              :class="activeTab === tab ? 'text-accent border-accent' : 'text-slate-400 border-transparent hover:text-slate-600'"
             >
               {{ tab }}
             </button>
