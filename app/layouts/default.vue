@@ -59,6 +59,7 @@ const menuItems = computed(() => {
       { name: t('fees'), icon: Wallet, to: '/fees', roles: ['admin'] },
       { name: t('bus-tracking'), icon: Bus, to: '/bus-tracking', roles: ['admin'] },
       { name: t('settings'), icon: Settings, to: '/settings', roles: ['admin'] },
+      { name: 'My Profile', icon: User, to: '/profile', roles: ['admin'] },
     )
   } else if (role === 'teacher') {
     items.push(
@@ -70,6 +71,8 @@ const menuItems = computed(() => {
       { name: 'Students', icon: GraduationCap, to: '/students', roles: ['teacher'] },
       { name: 'Reports', icon: FileBarChart, to: '/reports', roles: ['teacher'] },
       { name: 'Messages', icon: UserCircle, to: '/teacher/messages', roles: ['teacher'] },
+      { name: 'My Profile', icon: User, to: '/profile', roles: ['teacher'] },
+      { name: t('settings'), icon: Settings, to: '/settings', roles: ['teacher'] },
     )
   } else if (role === 'student') {
     items.push(
@@ -82,6 +85,8 @@ const menuItems = computed(() => {
       { name: t('progress'), icon: FileBarChart, to: '/progress', roles: ['student'] },
       { name: t('prediction'), icon: Sparkles, to: '/prediction', roles: ['student'] },
       { name: t('bus-tracking'), icon: Bus, to: '/bus-tracking', roles: ['student'] },
+      { name: 'My Profile', icon: User, to: '/profile', roles: ['student'] },
+      { name: t('settings'), icon: Settings, to: '/settings', roles: ['student'] },
     )
   } else if (role === 'parent') {
     items.push(
@@ -94,6 +99,8 @@ const menuItems = computed(() => {
       { name: t('bus-tracking'), icon: Bus, to: '/bus-tracking', roles: ['parent'] },
       { name: t('fees'), icon: Wallet, to: '/parent/fees', roles: ['parent'] },
       { name: 'Messages', icon: UserCircle, to: '/parent/messages', roles: ['parent'] },
+      { name: 'My Profile', icon: User, to: '/profile', roles: ['parent'] },
+      { name: t('settings'), icon: Settings, to: '/settings', roles: ['parent'] },
     )
   }
 
@@ -126,6 +133,9 @@ const getHeaderTitle = () => {
     '/parent/attendance': 'Child Attendance',
     '/parent/fees': 'Fees & Payments',
     '/parent/messages': 'Messages',
+    '/profile': 'My Profile',
+    '/settings': 'Settings',
+    '/teachers': 'Teacher Directory',
   }
   if (route.path.startsWith('/students/')) return 'Student Details'
   if (route.path.startsWith('/teacher/')) return titles[route.path] || 'Teacher Portal'
@@ -157,7 +167,8 @@ const handleLogout = () => {
 }
 
 const handleSettings = () => {
-  // Navigation to settings
+  router.push('/settings')
+  isMobileMenuOpen.value = false
 }
 </script>
 
@@ -328,13 +339,13 @@ const handleSettings = () => {
                   <p class="text-xs text-slate-500 font-medium truncate">{{ currentUser.email }}</p>
                 </div>
                 <div class="p-2">
-                  <button
+                  <button @click="router.push('/profile'); isProfileOpen = false"
                     class="w-full px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl flex items-center gap-3 transition-colors"
                     :class="direction === 'rtl' ? 'text-right' : 'text-left'">
                     <User class="w-4 h-4" />
                     {{ t('my_profile') }}
                   </button>
-                  <button
+                  <button @click="router.push('/settings'); isProfileOpen = false"
                     class="w-full px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl flex items-center gap-3 transition-colors"
                     :class="direction === 'rtl' ? 'text-right' : 'text-left'">
                     <Settings class="w-4 h-4" />
