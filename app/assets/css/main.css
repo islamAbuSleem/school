@@ -210,6 +210,14 @@
     --tw-ring-color: var(--color-accent);
   }
   
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
   .from-accent {
     --tw-gradient-from: var(--color-accent);
   }

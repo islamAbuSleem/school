@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[1600px] mx-auto pb-16">
+  <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
     <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-8 gap-4">
       <div>
         <p class="text-xs font-semibold text-accent uppercase tracking-wider mb-2">Real-time Logistics</p>

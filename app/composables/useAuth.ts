@@ -1,3 +1,7 @@
+import { useState, useRouter } from '#app'
+import { computed } from 'vue'
+import { useToast } from './useToast'
+import { useData } from './useData'
 import type { User, Teacher, Student } from '../types'
 
 export const useAuth = () => {

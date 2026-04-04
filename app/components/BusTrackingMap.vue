@@ -114,13 +114,30 @@ const recenter = () => {
     </div>
 
     <!-- Status Bar -->
-    <div class="absolute bottom-8 left-8 right-24 bg-slate-900/95 backdrop-blur-md p-6 rounded-[32px] shadow-2xl ring-1 ring-white/10 flex items-center space-x-6 z-10">
-      <div class="p-3 bg-indigo-500/20 rounded-2xl">
-        <Navigation class="w-6 h-6 text-indigo-400 animate-pulse" stroke-width="2.5" />
+    <div class="absolute bottom-8 left-8 right-24 bg-slate-900/95 backdrop-blur-md p-6 rounded-[32px] shadow-2xl ring-1 ring-white/10 flex items-center justify-between z-10">
+      <div class="flex items-center space-x-6">
+        <div class="p-3 bg-indigo-500/20 rounded-2xl">
+          <Navigation class="w-6 h-6 text-indigo-400 animate-pulse" stroke-width="2.5" />
+        </div>
+        <div>
+          <h4 class="text-lg font-black text-white tracking-tight mb-0.5">Live Tracking</h4>
+          <p class="text-indigo-200/60 text-[10px] font-bold leading-tight uppercase tracking-widest">Route 42B • Approaching Oak Ridge Dr.</p>
+        </div>
       </div>
-      <div>
-        <h4 class="text-lg font-black text-white tracking-tight mb-0.5">Live Tracking</h4>
-        <p class="text-indigo-200/60 text-[10px] font-bold leading-tight uppercase tracking-widest">Route 42B • Approaching Oak Ridge Dr.</p>
+      
+      <div class="hidden md:flex items-center space-x-8 px-8 border-l border-white/10">
+        <div>
+          <p class="text-[8px] font-black text-white/40 uppercase tracking-[0.2em] mb-1">SPEED</p>
+          <p class="text-sm font-black text-white">42 KM/H</p>
+        </div>
+        <div>
+          <p class="text-[8px] font-black text-white/40 uppercase tracking-[0.2em] mb-1">STOPS LEFT</p>
+          <p class="text-sm font-black text-white">3 / 5</p>
+        </div>
+        <div>
+          <p class="text-[8px] font-black text-white/40 uppercase tracking-[0.2em] mb-1">FUEL LEVEL</p>
+          <p class="text-sm font-black text-green-400">88%</p>
+        </div>
       </div>
     </div>
 

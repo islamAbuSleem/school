@@ -24,21 +24,34 @@ import { User, Star, MessageSquare } from 'lucide-vue-next'
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-6 mb-12">
-        <div class="bg-white/5 p-6 rounded-3xl border border-white/5">
-          <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-2">BUS LICENSE</p>
-          <p class="text-sm font-black text-white tracking-widest">TX–8821–B</p>
+      <div class="grid grid-cols-2 gap-4 mb-10">
+        <div class="bg-white/5 p-5 rounded-3xl border border-white/5">
+          <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">LICENSE</p>
+          <p class="text-xs font-black text-white tracking-widest">TX–8821–B</p>
         </div>
-        <div class="bg-white/5 p-6 rounded-3xl border border-white/5">
-          <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-2">SAFETY RATING</p>
-          <p class="text-sm font-black text-green-400 tracking-widest">Excellent</p>
+        <div class="bg-white/5 p-5 rounded-3xl border border-white/5">
+          <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">PHONE</p>
+          <p class="text-xs font-black text-indigo-400 tracking-widest">+1 (555) 928-31</p>
+        </div>
+        <div class="bg-white/5 p-5 rounded-3xl border border-white/5">
+          <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">SAFETY</p>
+          <p class="text-xs font-black text-green-400 tracking-widest">98.2%</p>
+        </div>
+        <div class="bg-white/5 p-5 rounded-3xl border border-white/5">
+          <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">INCIDENTS</p>
+          <p class="text-xs font-black text-white tracking-widest">0</p>
         </div>
       </div>
 
-      <button class="w-full py-5 bg-white text-[#0F172A] rounded-[24px] font-black text-[11px] tracking-widest uppercase shadow-2xl hover:bg-slate-50 transition-all transform hover:translate-y-[-2px] flex items-center justify-center">
-        <MessageSquare class="w-5 h-5 mr-4" />
-        Message Driver
-      </button>
+      <div class="flex flex-col space-y-3">
+        <button class="w-full py-5 bg-indigo-600 text-white rounded-[24px] font-black text-[11px] tracking-widest uppercase shadow-2xl hover:bg-indigo-700 transition-all transform hover:translate-y-[-2px] flex items-center justify-center border border-indigo-500">
+          <MessageSquare class="w-5 h-5 mr-4" />
+          Quick Message
+        </button>
+        <button class="w-full py-5 bg-white/5 text-white/60 rounded-[24px] font-black text-[11px] tracking-widest uppercase hover:bg-white/10 transition-all flex items-center justify-center border border-white/5">
+          Full Driver Records
+        </button>
+      </div>
     </div>
   </div>
 </template>
