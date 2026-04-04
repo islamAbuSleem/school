@@ -43,20 +43,61 @@ onMounted(() => {
 })
 
 const menuItems = computed(() => {
-  const allItems = [
-    { name: t('dashboard'), icon: LayoutGrid, to: '/', roles: ['admin', 'teacher', 'student', 'parent'] },
-    { name: t('students'), icon: GraduationCap, to: '/students', roles: ['admin', 'teacher'] },
-    { name: t('classes'), icon: BookOpen, to: '/classes', roles: ['admin', 'teacher', 'student'] },
-    { name: t('attendance'), icon: CalendarCheck, to: '/attendance', roles: ['admin', 'teacher'] },
-    { name: t('progress'), icon: TrendingUp, to: '/progress', roles: ['admin', 'teacher', 'student', 'parent'] },
-    { name: t('curriculum'), icon: ClipboardList, to: '/curriculum', roles: ['admin', 'teacher', 'student'] },
-    { name: t('reports'), icon: FileBarChart, to: '/reports', roles: ['admin', 'teacher', 'parent'] },
-    { name: t('prediction'), icon: Sparkles, to: '/prediction', roles: ['admin', 'student', 'parent'] },
-    { name: t('bus-tracking'), icon: Bus, to: '/bus-tracking', roles: ['admin', 'parent', 'student'] },
-    { name: t('fees'), icon: Wallet, to: '/fees', roles: ['admin', 'parent'] },
-  ]
+  const role = currentUser.value?.role
+  const items: { name: string; icon: any; to: string; roles: string[] }[] = []
 
-  return allItems.filter(item => item.roles.includes(currentUser.value?.role || ''))
+  if (role === 'admin') {
+    items.push(
+      { name: t('dashboard'), icon: LayoutGrid, to: '/', roles: ['admin'] },
+      { name: t('students'), icon: GraduationCap, to: '/students', roles: ['admin'] },
+      { name: 'Teachers', icon: UserCircle, to: '/teachers', roles: ['admin'] },
+      { name: t('classes'), icon: BookOpen, to: '/classes', roles: ['admin'] },
+      { name: t('attendance'), icon: CalendarCheck, to: '/attendance', roles: ['admin'] },
+      { name: 'Grades', icon: TrendingUp, to: '/grades', roles: ['admin'] },
+      { name: t('reports'), icon: FileBarChart, to: '/reports', roles: ['admin'] },
+      { name: t('prediction'), icon: Sparkles, to: '/prediction', roles: ['admin'] },
+      { name: t('fees'), icon: Wallet, to: '/fees', roles: ['admin'] },
+      { name: t('bus-tracking'), icon: Bus, to: '/bus-tracking', roles: ['admin'] },
+      { name: t('settings'), icon: Settings, to: '/settings', roles: ['admin'] },
+    )
+  } else if (role === 'teacher') {
+    items.push(
+      { name: t('dashboard'), icon: LayoutGrid, to: '/', roles: ['teacher'] },
+      { name: 'My Classes', icon: BookOpen, to: '/teacher/classes', roles: ['teacher'] },
+      { name: t('attendance'), icon: CalendarCheck, to: '/attendance', roles: ['teacher'] },
+      { name: 'Grade Entry', icon: TrendingUp, to: '/teacher/grades', roles: ['teacher'] },
+      { name: 'My Schedule', icon: CalendarCheck, to: '/teacher/schedule', roles: ['teacher'] },
+      { name: 'Students', icon: GraduationCap, to: '/students', roles: ['teacher'] },
+      { name: 'Reports', icon: FileBarChart, to: '/reports', roles: ['teacher'] },
+      { name: 'Messages', icon: UserCircle, to: '/teacher/messages', roles: ['teacher'] },
+    )
+  } else if (role === 'student') {
+    items.push(
+      { name: t('dashboard'), icon: LayoutGrid, to: '/', roles: ['student'] },
+      { name: 'My Schedule', icon: CalendarCheck, to: '/student/schedule', roles: ['student'] },
+      { name: 'My Grades', icon: TrendingUp, to: '/student/grades', roles: ['student'] },
+      { name: 'My Attendance', icon: CalendarCheck, to: '/student/attendance', roles: ['student'] },
+      { name: 'My Courses', icon: BookOpen, to: '/student/courses', roles: ['student'] },
+      { name: 'My Assignments', icon: ClipboardList, to: '/student/assignments', roles: ['student'] },
+      { name: t('progress'), icon: FileBarChart, to: '/progress', roles: ['student'] },
+      { name: t('prediction'), icon: Sparkles, to: '/prediction', roles: ['student'] },
+      { name: t('bus-tracking'), icon: Bus, to: '/bus-tracking', roles: ['student'] },
+    )
+  } else if (role === 'parent') {
+    items.push(
+      { name: t('dashboard'), icon: LayoutGrid, to: '/', roles: ['parent'] },
+      { name: 'My Children', icon: GraduationCap, to: '/parent/children', roles: ['parent'] },
+      { name: 'Child Progress', icon: TrendingUp, to: '/progress', roles: ['parent'] },
+      { name: 'Child Attendance', icon: CalendarCheck, to: '/parent/attendance', roles: ['parent'] },
+      { name: t('reports'), icon: FileBarChart, to: '/reports', roles: ['parent'] },
+      { name: t('prediction'), icon: Sparkles, to: '/prediction', roles: ['parent'] },
+      { name: t('bus-tracking'), icon: Bus, to: '/bus-tracking', roles: ['parent'] },
+      { name: t('fees'), icon: Wallet, to: '/parent/fees', roles: ['parent'] },
+      { name: 'Messages', icon: UserCircle, to: '/parent/messages', roles: ['parent'] },
+    )
+  }
+
+  return items
 })
 
 const getHeaderTitle = () => {
@@ -71,7 +112,25 @@ const getHeaderTitle = () => {
     '/curriculum': t('curriculum'),
     '/reports': t('reports'),
     '/prediction': t('prediction'),
+    '/settings': t('settings'),
+    '/teacher/classes': 'My Classes',
+    '/teacher/grades': 'Grade Entry',
+    '/teacher/schedule': 'My Schedule',
+    '/teacher/messages': 'Messages',
+    '/student/schedule': 'My Schedule',
+    '/student/grades': 'My Grades',
+    '/student/attendance': 'My Attendance',
+    '/student/courses': 'My Courses',
+    '/student/assignments': 'My Assignments',
+    '/parent/children': 'My Children',
+    '/parent/attendance': 'Child Attendance',
+    '/parent/fees': 'Fees & Payments',
+    '/parent/messages': 'Messages',
   }
+  if (route.path.startsWith('/students/')) return 'Student Details'
+  if (route.path.startsWith('/teacher/')) return titles[route.path] || 'Teacher Portal'
+  if (route.path.startsWith('/student/')) return titles[route.path] || 'Student Portal'
+  if (route.path.startsWith('/parent/')) return titles[route.path] || 'Parent Portal'
   return titles[route.path] || t('dashboard')
 }
 
