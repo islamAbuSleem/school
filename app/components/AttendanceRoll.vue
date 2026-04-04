@@ -1,22 +1,33 @@
 <script setup lang="ts">
 import { ChevronDown, Save } from 'lucide-vue-next'
+import type { AttendanceRecord } from '../types'
 
-const students = ref([
-  { id: '#2024-0012', name: 'Alexander Abernathy', initials: 'AA', status: 'present' },
-  { id: '#2024-0045', name: 'Beatrice Bennett', initials: 'BB', status: 'late' },
-  { id: '#2024-0089', name: 'Caleb Hughes', initials: 'CH', status: 'excused' },
-  { id: '#2024-0102', name: 'Diana Lawrence', initials: 'DL', status: 'present' },
-  { id: '#2024-0134', name: 'Ethan Miller', initials: 'EM', status: 'present' },
-])
+const { getStudentsForClass, saveAttendance } = useData()
 
-const setStatus = (studentId: string, status: string) => {
-  const student = students.value.find(s => s.id === studentId)
+// For now, we'll assume we are looking at class C001
+const classId = 'C001'
+const studentList = ref(getStudentsForClass(classId).map(s => ({
+  ...s,
+  status: 'present' as AttendanceRecord['status']
+})))
+
+const setStatus = (studentId: string, status: AttendanceRecord['status']) => {
+  const student = studentList.value.find(s => s.id === studentId)
   if (student) student.status = status
 }
 
 const { success } = useToast()
 const submitRoll = () => {
-  success('Attendance Saved', 'Morning roll has been successfully submitted for 5/5 students.')
+  const records = studentList.value.map(s => ({
+    studentId: s.id,
+    classId: classId,
+    date: new Date().toISOString(),
+    status: s.status,
+    markedBy: 'T001' // Mocking logged in teacher
+  }))
+  
+  saveAttendance(records)
+  success('Attendance Saved', `Morning roll has been successfully submitted for ${studentList.value.length}/${studentList.value.length} students.`)
 }
 
 const statusColors: Record<string, string> = {
@@ -51,14 +62,14 @@ const statusColors: Record<string, string> = {
       <div class="text-[10px] font-medium text-slate-400 uppercase tracking-wider pb-2 border-b border-slate-100 text-center">Absent</div>
       <div class="text-[10px] font-medium text-slate-400 uppercase tracking-wider pb-2 border-b border-slate-100 text-center">Excused</div>
 
-      <template v-for="student in students" :key="student.id">
+      <template v-for="student in studentList" :key="student.id">
         <div class="flex items-center gap-3 py-2">
-          <div :class="['w-10 h-10 rounded-xl flex items-center justify-center font-semibold text-sm', statusColors[student.initials]]">
+          <div :class="['w-10 h-10 rounded-xl flex items-center justify-center font-semibold text-sm', statusColors[student.initials] || 'bg-slate-100 text-slate-600']">
             {{ student.initials }}
           </div>
           <div>
             <div class="font-semibold text-slate-700 text-sm">{{ student.name }}</div>
-            <div class="text-[10px] text-slate-400">ID: {{ student.id }}</div>
+            <div class="text-[10px] text-slate-400">ID: {{ student.enrollmentId }}</div>
           </div>
         </div>
 
@@ -98,7 +109,7 @@ const statusColors: Record<string, string> = {
     </div>
 
     <div class="mt-12 flex items-center justify-between border-t border-slate-100 pt-6">
-      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Marked: {{ students.filter(s => s.status !== 'absent').length }}/{{ students.length }}</p>
+      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Marked: {{ studentList.filter(s => s.status !== 'absent').length }}/{{ studentList.length }}</p>
       <button 
         @click="submitRoll"
         class="btn-primary flex items-center gap-2 px-8 py-3 text-xs"
