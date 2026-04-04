@@ -15,7 +15,10 @@ export const useParent = () => {
   // Initialize active child if not set
   onMounted(() => {
     if (!activeChildId.value && myChildren.value.length > 0) {
-      activeChildId.value = myChildren.value[0].id
+      const firstChild = myChildren.value[0]
+      if (firstChild) {
+        activeChildId.value = firstChild.id
+      }
     }
   })
 
@@ -31,7 +34,7 @@ export const useParent = () => {
   const behaviorRecords = useState<BehaviorRecord[]>('mockBehavior', () => [
     { id: 'B1', studentId: 'S001', teacherId: 'T001', type: 'positive', category: 'participation', points: 5, comment: 'Excellent participation in Algebra', date: new Date().toISOString() },
     { id: 'B2', studentId: 'S001', teacherId: 'T002', type: 'positive', category: 'conduct', points: 10, comment: 'Helped peers with history project', date: new Date().toISOString() },
-    { id: 'B3', studentId: 'S005', studentId_fixed: 'S005', teacherId: 'T001', type: 'negative', category: 'assignment', points: -5, comment: 'Incomplete homework', date: new Date().toISOString() },
+    { id: 'B3', studentId: 'S005', teacherId: 'T001', type: 'negative', category: 'assignment', points: -5, comment: 'Incomplete homework', date: new Date().toISOString() },
   ])
 
   const childBehavior = computed(() => {

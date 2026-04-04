@@ -37,7 +37,6 @@ const updateBusPosition = () => {
 
 onMounted(async () => {
   // Dynamically load Leaflet
-  if (!process.client) return
 
   // Load CSS
   const link = document.createElement('link')

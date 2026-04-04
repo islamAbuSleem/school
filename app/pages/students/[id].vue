@@ -11,12 +11,14 @@ import {
   MessageSquare,
   ChevronRight,
   Download,
-  ShieldCheck,
-  AlertCircle
+  ShieldCheck
 } from 'lucide-vue-next'
 
 const route = useRoute()
-const studentId = route.params.id
+const studentId = computed(() => {
+  const id = route.params.id
+  return Array.isArray(id) ? id[0] : id
+})
 
 const activeTab = ref('Overview')
 const tabs = ['Overview', 'Academic', 'Attendance', 'Behavioral']
@@ -186,11 +188,25 @@ const downloadReport = () => {
           </div>
         </template>
         
-        <template v-else>
-          <div class="glass-card-static p-20 flex flex-col items-center justify-center text-center opacity-50">
-            <AlertCircle class="w-12 h-12 text-slate-300 mb-4" />
-            <h3 class="text-xl font-black text-slate-800 tracking-tight">Section Under Development</h3>
-            <p class="text-sm text-slate-500 mt-2">The {{ activeTab }} module for detailed analysis is being synchronized.</p>
+        <template v-else-if="activeTab === 'Academic'">
+          <div class="space-y-8">
+            <StudentAcademicOverview :student-id="studentId" />
+            <StudentGradesTable :student-id="studentId" />
+            <StudentTeacherComments :student-id="studentId" />
+          </div>
+        </template>
+        
+        <template v-else-if="activeTab === 'Attendance'">
+          <div class="space-y-8">
+            <StudentAttendanceStats :student-id="studentId" />
+            <StudentAttendanceDetail :student-id="studentId" />
+          </div>
+        </template>
+        
+        <template v-else-if="activeTab === 'Behavioral'">
+          <div class="space-y-8">
+            <StudentBehaviorSummary :student-id="studentId" />
+            <StudentBehaviorHistory :student-id="studentId" />
           </div>
         </template>
       </div>

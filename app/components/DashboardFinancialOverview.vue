@@ -14,6 +14,7 @@ const revenueData = [35, 45, 55, 70, 50, 65]
 const expensesData = [25, 30, 35, 40, 35, 45]
 
 const getData = () => activeTab.value === 'revenue' ? revenueData : expensesData
+const getValue = (index: number) => getData()[index] ?? 0
 
 const { info } = useToast()
 
@@ -45,7 +46,7 @@ const handleTabChange = (tab: string) => {
         <div class="relative w-3 h-40 bg-slate-100 rounded-full flex items-end overflow-hidden">
           <div 
             class="w-full bg-gradient-to-t from-accent to-purple-400 rounded-full transition-all duration-700 group-hover:opacity-80"
-            :style="{ height: getData()[index] + '%' }"
+            :style="{ height: getValue(index) + '%' }"
           ></div>
           <Transition
             enter-active-class="transition ease-out duration-200"
@@ -56,7 +57,7 @@ const handleTabChange = (tab: string) => {
             leave-to-class="opacity-0 -translate-y-2"
           >
             <div v-if="activeTab === 'revenue'" class="absolute -top-8 left-1/2 -translate-x-1/2 bg-accent text-white text-[10px] font-bold px-2 py-1 rounded-lg shadow-lg whitespace-nowrap">
-              ${{ getData()[index] * 1000 }}
+              ${{ getValue(index) * 1000 }}
             </div>
           </Transition>
         </div>

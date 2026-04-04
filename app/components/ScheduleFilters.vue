@@ -2,7 +2,7 @@
 const { selectedGrade, selectedTeacher, viewMode, setGrade, setTeacher, setViewMode, grades, teachers } = useSchedule()
 
 const gradeOptions = grades.map(g => ({ value: g, label: g }))
-const teacherOptions = teachers.map(t => ({ value: t, label: t }))
+const teacherOptions = computed(() => teachers.value.map(t => ({ value: t, label: t })))
 
 const viewOptions = [
   { label: 'Week View', value: 'Week View' },

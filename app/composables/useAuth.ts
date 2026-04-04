@@ -20,14 +20,14 @@ export const useAuth = () => {
   const teacherProfile = computed(() => {
     if (currentUser.value?.role !== 'teacher') return null
     const { teachers } = useData()
-    return teachers.value.find(t => t.id === currentUser.value?.id) as Teacher
+    return teachers.value.find(t => t.id === currentUser.value?.id) ?? null
   })
 
   // Helper to get student specific data if logged in as student
   const studentProfile = computed(() => {
     if (currentUser.value?.role !== 'student') return null
     const { students } = useData()
-    return students.value.find(s => s.id === currentUser.value?.id) as Student
+    return students.value.find(s => s.id === currentUser.value?.id) ?? null
   })
 
   const login = (role: User['role']) => {
@@ -35,10 +35,14 @@ export const useAuth = () => {
     
     if (role === 'teacher') {
       const teacher = teachers.value[0]
-      currentUser.value = { ...teacher }
+      if (teacher) {
+        currentUser.value = { ...teacher }
+      }
     } else if (role === 'student') {
       const student = students.value[0]
-      currentUser.value = { ...student }
+      if (student) {
+        currentUser.value = { ...student }
+      }
     } else if (role === 'parent') {
       currentUser.value = {
         id: 'P001',

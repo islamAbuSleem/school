@@ -4,7 +4,7 @@ export const useLocale = () => {
 
   const toggleLocale = () => {
     currentLocale.value = currentLocale.value === 'en' ? 'ar' : 'en'
-    if (process.client) {
+    if (typeof document !== 'undefined') {
       document.documentElement.setAttribute('dir', direction.value)
       document.documentElement.setAttribute('lang', currentLocale.value)
     }

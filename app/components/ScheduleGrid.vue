@@ -121,7 +121,7 @@ const handleAssign = () => {
             :key="`${day}-${time}`"
             class="h-36 p-2 border-b border-r border-slate-100 last:border-r-0 bg-white relative"
           >
-            <template v-if="getItem(day, time)?.type && getItem(day, time)!.type !== 'placeholder'">
+            <template v-if="getItem(day, time) && getItem(day, time)?.type !== 'placeholder'">
               <div 
                 class="h-full rounded-xl border-l-4 p-3 flex flex-col justify-between transition-all hover:scale-[1.02] cursor-pointer group"
                 :class="getCardColor(getItem(day, time)!.type)"
@@ -185,7 +185,7 @@ const handleAssign = () => {
             <span class="text-sm font-bold text-slate-600">{{ time }}</span>
           </div>
           <div class="flex-1 p-4 bg-white relative min-h-[140px]">
-            <template v-if="getItem(days[currentDayIndex], time)?.type && getItem(days[currentDayIndex], time)!.type !== 'placeholder'">
+            <template v-if="getItem(days[currentDayIndex], time) && getItem(days[currentDayIndex], time)?.type !== 'placeholder'">
               <div 
                 class="h-full rounded-2xl border-l-4 p-5 flex items-center justify-between transition-all hover:translate-x-1 cursor-pointer shadow-sm hover:shadow-md"
                 :class="getCardColor(getItem(days[currentDayIndex], time)!.type)"
