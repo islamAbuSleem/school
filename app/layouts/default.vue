@@ -58,8 +58,6 @@ const menuItems = computed(() => {
       { name: t('prediction'), icon: Sparkles, to: '/prediction', roles: ['admin'] },
       { name: t('fees'), icon: Wallet, to: '/fees', roles: ['admin'] },
       { name: t('bus-tracking'), icon: Bus, to: '/bus-tracking', roles: ['admin'] },
-      { name: t('settings'), icon: Settings, to: '/settings', roles: ['admin'] },
-      { name: 'My Profile', icon: User, to: '/profile', roles: ['admin'] },
     )
   } else if (role === 'teacher') {
     items.push(
@@ -339,13 +337,13 @@ const handleSettings = () => {
                   <p class="text-xs text-slate-500 font-medium truncate">{{ currentUser.email }}</p>
                 </div>
                 <div class="p-2">
-                  <button @click="router.push('/profile'); isProfileOpen = false"
+                  <button @click="isProfileOpen = false; router.push('/profile')"
                     class="w-full px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl flex items-center gap-3 transition-colors"
                     :class="direction === 'rtl' ? 'text-right' : 'text-left'">
                     <User class="w-4 h-4" />
                     {{ t('my_profile') }}
                   </button>
-                  <button @click="router.push('/settings'); isProfileOpen = false"
+                  <button @click="isProfileOpen = false; router.push('/settings')"
                     class="w-full px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl flex items-center gap-3 transition-colors"
                     :class="direction === 'rtl' ? 'text-right' : 'text-left'">
                     <Settings class="w-4 h-4" />
@@ -361,7 +359,7 @@ const handleSettings = () => {
                 </div>
               </div>
             </Transition>
-            <div v-if="isProfileOpen" @click="isProfileOpen = false" class="fixed inset-0 z-[90]"></div>
+            <div v-if="isProfileOpen" @click="isProfileOpen = false" class="fixed inset-0 z-40"></div>
           </div>
         </div>
 
