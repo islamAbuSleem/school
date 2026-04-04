@@ -1,5 +1,5 @@
 import { useState, useRouter } from '#app'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useToast } from './useToast'
 import { useData } from './useData'
 import type { User, Teacher, Student } from '../types'
@@ -8,22 +8,39 @@ export const useAuth = () => {
   const router = useRouter()
   const { success } = useToast()
 
-  // Mock current user - initially null to force login
-  const currentUser = useState<User | null>('currentUser', () => null)
+  const currentUser = useState<User | null>('currentUser', () => {
+    // Restore from localStorage on init
+    if (typeof localStorage !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('school_user')
+        if (saved) return JSON.parse(saved) as User
+      } catch {}
+    }
+    return null
+  })
 
   const isTeacher = computed(() => currentUser.value?.role === 'teacher')
   const isStudent = computed(() => currentUser.value?.role === 'student')
   const isAdmin = computed(() => currentUser.value?.role === 'admin')
   const isParent = computed(() => currentUser.value?.role === 'parent')
 
-  // Helper to get teacher specific data if logged in as teacher
+  const saveUser = (user: User | null) => {
+    currentUser.value = user
+    if (typeof localStorage !== 'undefined') {
+      if (user) {
+        localStorage.setItem('school_user', JSON.stringify(user))
+      } else {
+        localStorage.removeItem('school_user')
+      }
+    }
+  }
+
   const teacherProfile = computed(() => {
     if (currentUser.value?.role !== 'teacher') return null
     const { teachers } = useData()
     return teachers.value.find(t => t.id === currentUser.value?.id) ?? null
   })
 
-  // Helper to get student specific data if logged in as student
   const studentProfile = computed(() => {
     if (currentUser.value?.role !== 'student') return null
     const { students } = useData()
@@ -36,29 +53,29 @@ export const useAuth = () => {
     if (role === 'teacher') {
       const teacher = teachers.value[0]
       if (teacher) {
-        currentUser.value = { ...teacher }
+        saveUser({ ...teacher })
       }
     } else if (role === 'student') {
       const student = students.value[0]
       if (student) {
-        currentUser.value = { ...student }
+        saveUser({ ...student })
       }
     } else if (role === 'parent') {
-      currentUser.value = {
+      saveUser({
         id: 'P001',
         name: 'Robert Edwards',
         role: 'parent',
         email: 'robert@parent.com',
         initials: 'RE'
-      }
+      })
     } else if (role === 'admin') {
-      currentUser.value = {
+      saveUser({
         id: 'A001',
         name: 'Sarah Connor',
         role: 'admin',
         email: 'admin@school.com',
         initials: 'SC'
-      }
+      })
     }
 
     success('Login Successful', `Welcome back, ${currentUser.value?.name}`)
@@ -66,7 +83,7 @@ export const useAuth = () => {
   }
 
   const logout = () => {
-    currentUser.value = null
+    saveUser(null)
     router.push('/login')
   }
 

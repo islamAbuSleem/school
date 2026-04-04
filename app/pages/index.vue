@@ -4,6 +4,7 @@ import { TrendingUp, BookOpen, Calendar, Users, Award, AlertCircle, Clock, Chevr
 const { currentUser, isTeacher, isStudent, isAdmin, isParent, teacherProfile, studentProfile } = useAuth()
 const { myChildren, activeChild } = useParent()
 const { classes, students, attendanceRecords } = useData()
+const { success, info } = useToast()
 
 // For Teachers: Get their classes
 const myClasses = computed(() => {
@@ -27,16 +28,28 @@ const avgAttendance = computed(() => {
 })
 
 const pendingTasks = [
-  { task: 'Review Term 2 grades', due: 'Tomorrow', priority: 'high' },
-  { task: 'Update attendance records', due: 'Today', priority: 'medium' },
-  { task: 'Prepare staff meeting agenda', due: 'Friday', priority: 'low' },
+  { task: 'Review Term 2 grades', due: 'Tomorrow', priority: 'high' as const },
+  { task: 'Update attendance records', due: 'Today', priority: 'medium' as const },
+  { task: 'Prepare staff meeting agenda', due: 'Friday', priority: 'low' as const },
 ]
 
 const upcomingDeadlines = [
-  { title: 'Physics Lab Report', due: 'Tomorrow', subject: 'Physics', priority: 'high' },
-  { title: 'Math Problem Set #12', due: 'Jan 20', subject: 'Mathematics', priority: 'medium' },
-  { title: 'History Essay Draft', due: 'Jan 25', subject: 'History', priority: 'low' },
+  { title: 'Physics Lab Report', due: 'Tomorrow', subject: 'Physics', priority: 'high' as const },
+  { title: 'Math Problem Set #12', due: 'Jan 20', subject: 'Mathematics', priority: 'medium' as const },
+  { title: 'History Essay Draft', due: 'Jan 25', subject: 'History', priority: 'low' as const },
 ]
+
+const handleNewEnrollment = () => {
+  info('New Enrollment', 'Enrollment form would open here. Connect to backend API.')
+}
+
+const handleViewStudents = () => {
+  info('Students', `Currently ${students.value.length} students enrolled`)
+}
+
+const handleViewClasses = () => {
+  info('Classes', `${classes.value.length} active classes this term`)
+}
 </script>
 
 <template>
@@ -52,14 +65,14 @@ const upcomingDeadlines = [
             Here's the curated overview of Prestige Academy's performance and operations for today.
           </p>
         </div>
-        <button class="btn-primary flex items-center self-start lg:self-auto">
+        <button @click="handleNewEnrollment" class="btn-primary flex items-center self-start lg:self-auto">
           <Plus class="w-4 h-4 mr-2" />
           New Enrollment
         </button>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        <div class="glass-card-static p-6 border-l-4 border-l-indigo-500">
+        <NuxtLink to="/students" class="glass-card-static p-6 border-l-4 border-l-indigo-500 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all">
           <div class="flex items-center justify-between mb-4">
             <div class="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
               <Users class="w-5 h-5" />
@@ -68,9 +81,9 @@ const upcomingDeadlines = [
           <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Students</p>
           <p class="text-3xl font-black text-slate-800">{{ totalStudents }}</p>
           <p class="text-xs text-emerald-600 mt-2 font-bold">+12 this month</p>
-        </div>
+        </NuxtLink>
 
-        <div class="glass-card-static p-6 border-l-4 border-l-emerald-500">
+        <NuxtLink to="/classes" class="glass-card-static p-6 border-l-4 border-l-emerald-500 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all">
           <div class="flex items-center justify-between mb-4">
             <div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600">
               <BookOpen class="w-5 h-5" />
@@ -79,9 +92,9 @@ const upcomingDeadlines = [
           <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Active Classes</p>
           <p class="text-3xl font-black text-slate-800">{{ totalClasses }}</p>
           <p class="text-xs text-slate-500 mt-2">Across all grades</p>
-        </div>
+        </NuxtLink>
 
-        <div class="glass-card-static p-6 border-l-4 border-l-amber-500">
+        <NuxtLink to="/attendance" class="glass-card-static p-6 border-l-4 border-l-amber-500 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all">
           <div class="flex items-center justify-between mb-4">
             <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600">
               <Calendar class="w-5 h-5" />
@@ -90,9 +103,9 @@ const upcomingDeadlines = [
           <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Avg Attendance</p>
           <p class="text-3xl font-black text-slate-800">{{ avgAttendance }}%</p>
           <p class="text-xs text-emerald-600 mt-2 font-bold">+1.2% vs last term</p>
-        </div>
+        </NuxtLink>
 
-        <div class="glass-card-static p-6 border-l-4 border-l-rose-500">
+        <div @click="info('Alerts', '3 alerts require your attention')" class="glass-card-static p-6 border-l-4 border-l-rose-500 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all">
           <div class="flex items-center justify-between mb-4">
             <div class="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600">
               <AlertCircle class="w-5 h-5" />
